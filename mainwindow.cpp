@@ -9,6 +9,8 @@ typedef struct
   char  email[40];
 } ELEMENT;
 
+int val=1;
+
 ELEMENT Elm[] = 
 { 
   {0,"",""},
@@ -28,8 +30,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::MainW
   ui->setupUi(this);
 
   //***** A modifier ***********************
-  setNom(Elm[1].nom);
-  setEmail(Elm[1].email);
+  setNom(Elm[val].nom);
+  setEmail(Elm[val].email);
   //****************************************
 }
 
@@ -69,17 +71,32 @@ void MainWindow::setEmail(const char* Text)
 void MainWindow::on_pushButtonSuivant_clicked()
 {
   fprintf(stderr,"Clic sur le bouton >>>\n");
-  // TO DO
+  val++;
+  if (val>5)
+    val=5;
+  fprintf(stdout,"valeur : %d\n",val);
+  actu();
 }
 
 void MainWindow::on_pushButtonPrecedent_clicked()
 {
   fprintf(stderr,"Clic sur le bouton <<<\n");
-  // TO DO
+  val--;
+  if (val<1)
+    val=1;
+  fprintf(stdout,"valeur : %d\n",val);
+  actu();
 }
+
 
 void MainWindow::on_pushButtonQuitter_clicked()
 {
   fprintf(stderr,"Clic sur le bouton Quitter\n");
-  // TO DO
+  exit(0);
+}
+
+void MainWindow::actu()
+{
+  setNom(Elm[val].nom);
+  setEmail(Elm[val].email);
 }
